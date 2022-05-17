@@ -1,5 +1,6 @@
 import 'package:app2/model/home_page/destination_model.dart';
 import 'package:app2/modules/home/home_detail.dart';
+import 'package:app2/modules/home/home_top_list.dart';
 import 'package:app2/modules/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -100,97 +101,33 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20),
-            SizedBox(
-                height: 300,
-                // color: Colors.blue,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: destinations.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      Destination destination = destinations[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    NavigationScreen(const Detail())),
-                          );
-                        },
-                        child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(10.0),
-                            // color: Colors.red,
-                            child: Stack(
-                                alignment: Alignment.topCenter,
-                                children: <Widget>[
-                                  Positioned(
-                                    bottom: 15.0,
-                                    child: Container(
-                                      height: 120,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                                color: Colors.black26,
-                                                offset: Offset(0.0, 2.0),
-                                                blurRadius: 6.0)
-                                          ]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                                '${destination.activities!.length} activities',
-                                                style: const TextStyle(
-                                                    fontSize: 16.0,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black,
-                                                    letterSpacing: 1.2)),
-                                            Text(
-                                                destination.description ??
-                                                    "n/a",
-                                                style: const TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black45,
-                                                ))
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                                color: Colors.black26,
-                                                offset: Offset(0.0, 2.0),
-                                                blurRadius: 6.0)
-                                          ]),
-                                      child: Stack(children: <Widget>[
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          child: Image.network(
-                                              'https://znews-photo.zingcdn.me/w210/Uploaded/lce_mdlwc/2022_05_17/280652414_498433798736294_4739881545179881407_n_1.jpg',
-                                              height: 180,
-                                              width: 180,
-                                              fit: BoxFit.cover),
-                                        ),
-                                      ]))
-                                ])),
-                      );
-                    }))
+            HomeTop(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  const Text('Top 2',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                      )),
+                  GestureDetector(
+                    onTap: () {
+                      // ignore: avoid_print
+                      print('see all');
+                    },
+                    child: Text('See all',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: HexColor("#2155CD"),
+                          letterSpacing: 1.0,
+                        )),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

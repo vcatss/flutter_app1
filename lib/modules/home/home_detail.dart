@@ -4,13 +4,20 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Detail extends StatefulWidget {
-  const Detail({Key? key}) : super(key: key);
+  final int? index;
+  const Detail(this.index, {Key? key}) : super(key: key);
 
   @override
   State<Detail> createState() => _DetailState();
 }
 
 class _DetailState extends State<Detail> {
+  @override
+  void initState() {
+    super.initState();
+    print('Index[${widget.index}]');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +36,14 @@ class _DetailState extends State<Detail> {
                         blurRadius: 6.0,
                       )
                     ]),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.network(
-                      'https://znews-photo.zingcdn.me/w660/Uploaded/mfsy2/2022_04_26/ava_dj_soda.jpg',
-                      fit: BoxFit.cover),
+                child: Hero(
+                  tag: 'hero-${widget.index}',
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.network(
+                        'https://znews-photo.zingcdn.me/w660/Uploaded/mfsy2/2022_04_26/ava_dj_soda.jpg',
+                        fit: BoxFit.cover),
+                  ),
                 ),
               )
             ])
