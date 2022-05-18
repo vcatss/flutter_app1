@@ -4,6 +4,10 @@ import 'package:app2/modules/home/home_top_list.dart';
 import 'package:app2/modules/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+
+import '../../main.dart';
+import '../../model/home_page/news_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -48,8 +52,84 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _builderListNews(int index) {
+    News newModel = news[index];
+    return Container(
+        height: 80,
+        width: double.infinity,
+        margin: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+        decoration: const BoxDecoration(),
+        child: SizedBox(
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0.0, 2.0),
+                      blurRadius: 6.0)
+                ]),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network('${newModel.image}',
+                        height: double.infinity, width: 120),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                              // color: Colors.blue,
+                              height: 25,
+                              child: Row(children: [
+                                Text('${newModel.title}',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 13.0,
+                                      // letterSpacing: 0.4,
+                                      // fontFamily: 'Roboto',
+                                      color: Color(0xFF212121),
+                                      fontWeight: FontWeight.bold,
+                                    ))
+                              ])),
+                          Expanded(
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                '${newModel.description}',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                softWrap: false,
+                                style: const TextStyle(
+                                  overflow: TextOverflow.fade,
+                                  fontSize: 13.0,
+                                  letterSpacing: 0.3,
+                                  // fontFamily: 'Roboto',
+                                  color: Colors.black45,
+                                  // fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ]),
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Controller c = Get.find();
+
     return Scaffold(
       backgroundColor: HexColor('#EEEEEE'),
       body: SafeArea(
@@ -89,6 +169,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       // ignore: avoid_print
                       print('see all');
+                      c.increment();
                     },
                     child: Text('See all',
                         style: TextStyle(
@@ -107,7 +188,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  const Text('Top 2',
+                  const Text('News',
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
@@ -124,10 +205,17 @@ class _HomePageState extends State<HomePage> {
                           color: HexColor("#2155CD"),
                           letterSpacing: 1.0,
                         )),
-                  )
+                  ),
                 ],
               ),
             ),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: _icons
+                    .asMap()
+                    .entries
+                    .map((MapEntry map) => _builderListNews(map.key))
+                    .toList()),
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:app2/model/home_page/destination_model.dart';
 import 'package:app2/modules/home/home_detail.dart';
 import 'package:app2/modules/main/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeTop extends StatefulWidget {
   HomeTop({Key? key}) : super(key: key);
@@ -28,10 +29,7 @@ class _HomeTopState extends State<HomeTop> {
                   //   MaterialPageRoute(
                   //       builder: (context) => NavigationScreen(const Detail())),
                   // );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Detail(index)),
-                  );
+                  Get.to(Detail(index));
                 },
                 child: Container(
                     width: 210,

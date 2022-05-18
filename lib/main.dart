@@ -1,22 +1,41 @@
 import 'package:app2/modules/home/home_page.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'modules/app_sign_in/sign_in_page.dart';
 import 'modules/main/main_page.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var storage = const FlutterSecureStorage();
+  var token = await storage.read(key: "token");
+  if (token != "") {
+    runApp(const GetMaterialApp(home: MyApp()));
+  } else {
+    runApp(const GetMaterialApp(home: MyApp(MainPage)));
+  }
+}
+
+class Controller extends GetxController {
+  var count = 0.obs;
+  var storage = const FlutterSecureStorage();
+  increment() => count++;
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp(this.page, {Key? key}) : super(key: key);
+
+  final Widget? page;
 
   @override
   Widget build(BuildContext context) {
+    Get.put(Controller());
+    Controller c = Get.find();
     return MaterialApp(
       title: 'Title',
       theme:
           ThemeData(primarySwatch: Colors.indigo, primaryColor: Colors.indigo),
-      home: const MainPage(),
+      home: page ?? SignInPage(),
     );
   }
 }

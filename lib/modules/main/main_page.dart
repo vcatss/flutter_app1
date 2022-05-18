@@ -5,8 +5,14 @@ import 'package:app2/modules/product/product_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
+
+import '../../main.dart';
+import '../app_sign_in/sign_in_page.dart';
+import '../setting/setting_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -24,22 +30,23 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   late CurvedAnimation curve;
 
   final iconList = <IconData>[
-    Icons.brightness_3,
-    Icons.brightness_4,
-    Icons.brightness_6,
+    Icons.star,
+    Icons.star,
+    Icons.star,
     Icons.settings,
   ];
   final pageList = <Widget>[
     const HomePage(),
     const Detail(0),
     const Detail(0),
-    const Product(),
+    const SettingPage(),
   ];
+
   @override
   void initState() {
     super.initState();
     final systemTheme = SystemUiOverlayStyle.light.copyWith(
-      systemNavigationBarColor: HexColor('#373A36'),
+      systemNavigationBarColor: HexColor('#0000000'),
       systemNavigationBarIconBrightness: Brightness.light,
     );
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
@@ -93,10 +100,11 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
               color: HexColor('#E8F9FD'),
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Product()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const Product()),
+              // );
+              Get.to(SignInPage());
               _animationController.reset();
               _animationController.forward();
             },
