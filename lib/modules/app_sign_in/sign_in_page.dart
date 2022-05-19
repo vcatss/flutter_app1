@@ -124,53 +124,53 @@ class SignInPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14, color: Colors.black45)),
                 const SizedBox(height: 10),
-                // CustomButton(
-                //   border: 30,
-                //   color: Colors.white,
-                //   pressed: () {},
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Image.network(
-                //         'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=6d87i9KPdBBoj_a_NBRPGoAseNSAY6bd2R93IYexKIcboaRXqA-ACuk1WDiyht2tEzZ-',
-                //         height: 24,
-                //       ),
-                //       const Text('Đăng nhập với Google',
-                //           style: TextStyle(color: Colors.black45)),
-                //       Opacity(
-                //         opacity: 0,
-                //         child: Image.network(
-                //           'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=6d87i9KPdBBoj_a_NBRPGoAseNSAY6bd2R93IYexKIcboaRXqA-ACuk1WDiyht2tEzZ-',
-                //           height: 24,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(height: 0),
-                // CustomButton(
-                //   border: 30,
-                //   color: Colors.blue,
-                //   pressed: () {},
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Image.network(
-                //         'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=2a85heZ06j6NypQKWbW6G-9PNztg_xExoVFU19lHGldJdySq9mAGMGsC8TreQL1QpNdY',
-                //         height: 24,
-                //       ),
-                //       const Text('Đăng nhập với Facebook',
-                //           style: TextStyle(color: Colors.white)),
-                //       Opacity(
-                //         opacity: 0,
-                //         child: Image.network(
-                //           'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=2a85heZ06j6NypQKWbW6G-9PNztg_xExoVFU19lHGldJdySq9mAGMGsC8TreQL1QpNdY',
-                //           height: 24,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // )
+                CustomButton(
+                  border: 30,
+                  color: Colors.white,
+                  pressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.network(
+                        'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=6d87i9KPdBBoj_a_NBRPGoAseNSAY6bd2R93IYexKIcboaRXqA-ACuk1WDiyht2tEzZ-',
+                        height: 24,
+                      ),
+                      const Text('Đăng nhập với Google',
+                          style: TextStyle(color: Colors.black45)),
+                      Opacity(
+                        opacity: 0,
+                        child: Image.network(
+                          'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=6d87i9KPdBBoj_a_NBRPGoAseNSAY6bd2R93IYexKIcboaRXqA-ACuk1WDiyht2tEzZ-',
+                          height: 24,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 0),
+                CustomButton(
+                  border: 30,
+                  color: Colors.blue,
+                  pressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.network(
+                        'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=2a85heZ06j6NypQKWbW6G-9PNztg_xExoVFU19lHGldJdySq9mAGMGsC8TreQL1QpNdY',
+                        height: 24,
+                      ),
+                      const Text('Đăng nhập với Facebook',
+                          style: TextStyle(color: Colors.white)),
+                      Opacity(
+                        opacity: 0,
+                        child: Image.network(
+                          'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=2a85heZ06j6NypQKWbW6G-9PNztg_xExoVFU19lHGldJdySq9mAGMGsC8TreQL1QpNdY',
+                          height: 24,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             )));
   }

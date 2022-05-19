@@ -12,6 +12,7 @@ import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 
 import '../../main.dart';
 import '../app_sign_in/sign_in_page.dart';
+import '../e_gate/e_gate_main_page.dart';
 import '../setting/setting_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -30,9 +31,9 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   late CurvedAnimation curve;
 
   final iconList = <IconData>[
-    Icons.star,
-    Icons.star,
-    Icons.star,
+    Icons.home,
+    Icons.list,
+    Icons.newspaper,
     Icons.settings,
   ];
   final pageList = <Widget>[
@@ -95,16 +96,13 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
           child: FloatingActionButton(
             elevation: 8,
             backgroundColor: HexColor('#2155CD'),
-            child: Icon(
-              Icons.brightness_3,
-              color: HexColor('#E8F9FD'),
-            ),
+            child: Image.network(
+                'https://e-gate.vn/wp-content/uploads/2022/04/LOGO-EGATE_3-FA-1024x735.png'),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const Product()),
-              // );
-              Get.to(SignInPage());
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EGatePage()),
+              );
               _animationController.reset();
               _animationController.forward();
             },
