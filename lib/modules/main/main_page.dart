@@ -77,7 +77,7 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: ThemeData.dark(),
+      data: ThemeData.light(),
       child: Scaffold(
         extendBody: true,
         // appBar: AppBar(

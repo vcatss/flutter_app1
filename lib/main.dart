@@ -9,10 +9,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var storage = const FlutterSecureStorage();
   var token = await storage.read(key: "token");
-  if (token != "") {
-    runApp(const GetMaterialApp(home: MyApp()));
+  print(token);
+  if (token == "") {
+    runApp(GetMaterialApp(home: MyApp(SignInPage())));
   } else {
-    runApp(const GetMaterialApp(home: MyApp(MainPage)));
+    runApp(GetMaterialApp(home: MyApp(const MainPage())));
   }
 }
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       title: 'Title',
       theme:
           ThemeData(primarySwatch: Colors.indigo, primaryColor: Colors.indigo),
-      home: page ?? SignInPage(),
+      home: page,
     );
   }
 }
