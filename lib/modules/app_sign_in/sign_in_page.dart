@@ -1,23 +1,33 @@
 import 'package:alert/alert.dart';
+import 'package:app2/model/auth/login_model.dart';
 import 'package:app2/widget/common/custom_raised_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../main.dart';
 import '../../provider/auth/auth.dart';
 import '../main/main_page.dart';
+import 'dart:convert';
 
 class SignInController extends GetxController {
   var txtError = ''.obs;
 }
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   SignInPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
   var txtUserNameController = TextEditingController();
   var txtPasswordController = TextEditingController();
-
   String? txtError;
+  @override
+  // ignore: must_call_super
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +107,9 @@ class SignInPage extends StatelessWidget {
                         txtPasswordController.text.toString());
                     context.loaderOverlay.hide();
                     if (result.statusCode == 200) {
-                      await c.storage.write(key: "token", value: "123");
+                      var data = LoginInfo.fromJson(result.body);
+                      await c.storage
+                          .write(key: "token", value: data.result!.token);
                       final token = await c.storage.read(key: "token");
                       // ignore: avoid_print
                       print("Token: $token");
@@ -128,23 +140,26 @@ class SignInPage extends StatelessWidget {
                   border: 30,
                   color: Colors.white,
                   pressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.network(
-                        'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=6d87i9KPdBBoj_a_NBRPGoAseNSAY6bd2R93IYexKIcboaRXqA-ACuk1WDiyht2tEzZ-',
-                        height: 24,
-                      ),
-                      const Text('Đăng nhập với Google',
-                          style: TextStyle(color: Colors.black45)),
-                      Opacity(
-                        opacity: 0,
-                        child: Image.network(
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.network(
                           'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=6d87i9KPdBBoj_a_NBRPGoAseNSAY6bd2R93IYexKIcboaRXqA-ACuk1WDiyht2tEzZ-',
                           height: 24,
                         ),
-                      ),
-                    ],
+                        const Text('Đăng nhập với Google',
+                            style: TextStyle(color: Colors.black45)),
+                        Opacity(
+                          opacity: 0,
+                          child: Image.network(
+                            'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=6d87i9KPdBBoj_a_NBRPGoAseNSAY6bd2R93IYexKIcboaRXqA-ACuk1WDiyht2tEzZ-',
+                            height: 24,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 0),

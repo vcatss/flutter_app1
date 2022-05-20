@@ -1,13 +1,16 @@
+import 'dart:convert';
+
 import 'package:app2/model/home_page/destination_model.dart';
+import 'package:app2/model/home_page/product.dart';
 import 'package:app2/modules/home/home_detail.dart';
 import 'package:app2/modules/home/home_top_list.dart';
-import 'package:app2/modules/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../main.dart';
 import '../../model/home_page/news_model.dart';
+import '../../provider/product/product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -126,6 +129,20 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
+  loadProduct() async {
+    final HomeController c = Get.find();
+    var response = await ProductProvider().GetTopProduct();
+    var list = response.body["result"]["table"]["rows"] as List;
+    var itemsList = list.map((i) => ProductModel.fromJson(i)).toList();
+    c.listProduct = itemsList;
+    print(c.listProduct);
+  }
+
+  @override
+  initState() {
+    loadProduct();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Controller c = Get.find();
@@ -210,12 +227,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: _icons
-                    .asMap()
-                    .entries
-                    .map((MapEntry map) => _builderListNews(map.key))
-                    .toList()),
+                mainAxisAlignment: MainAxisAlignment.spaceAround, children: [])
           ],
         ),
       ),

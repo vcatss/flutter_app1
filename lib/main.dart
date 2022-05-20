@@ -2,6 +2,7 @@ import 'package:app2/modules/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'model/home_page/product.dart';
 import 'modules/app_sign_in/sign_in_page.dart';
 import 'modules/main/main_page.dart';
 
@@ -23,6 +24,11 @@ class Controller extends GetxController {
   increment() => count++;
 }
 
+class HomeController extends GetxController {
+  var storage = const FlutterSecureStorage();
+  List<ProductModel> listProduct = [];
+}
+
 class MyApp extends StatelessWidget {
   MyApp(this.page, {Key? key}) : super(key: key);
 
@@ -31,6 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(Controller());
+    Get.put(HomeController());
     Controller c = Get.find();
     return MaterialApp(
       title: 'Title',

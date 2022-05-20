@@ -13,6 +13,7 @@ class EGateDetail extends StatefulWidget {
 
 class _EGateDetailState extends State<EGateDetail> {
   bool isSwitched = false;
+  bool isSwitched2 = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,83 +30,67 @@ class _EGateDetailState extends State<EGateDetail> {
             Image.network(
                 'https://data.thuviengiaoandientu.com/?explorer/share/file&hash=d48diGTBxmSMCBCXfMqnvED_qdCqQbT5nCJfqak5PszaFk5O8tbe_CGhzkwnBrjXQB5n'),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    const Text('Front Door',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    Card(
-                        child: Padding(
+                Card(
+                    elevation: 0,
+                    color: Colors.transparent,
+                    child: Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: ListTile(
                         title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 30,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('Xác thực 2 lớp',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.black87)),
-                                      Switch(
-                                        value: isSwitched,
-                                        onChanged: (value) {},
-                                        activeTrackColor:
-                                            Colors.lightGreenAccent,
-                                        activeColor: Colors.green,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Column(
-                                  children: const [
-                                    Text(
-                                        'Chúng tôi sẽ yêu cầu mã kích hoạt khi tài khoản của bạn được đăng nhập trên một thiết bị lạ',
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            color: Colors.black54))
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Divider(
-                              height: 20,
-                              thickness: 1,
-                              indent: 1,
-                              endIndent: 1,
-                              color: Colors.black12,
-                            ),
-                            Column(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Column(
                                   children: const [
-                                    Text('Đặt mã khoá màn hình',
+                                    Text('Front Door',
                                         style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.black87))
+                                            fontSize: 15, color: Colors.white))
                                   ],
+                                ),
+                                const SizedBox(height: 5),
+                                Switch(
+                                  value: isSwitched,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isSwitched = value;
+                                    });
+                                  },
+                                  activeTrackColor: Colors.lightGreenAccent,
+                                  activeColor: Colors.green,
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: const [
+                                    Text('Back Door',
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.white))
+                                  ],
+                                ),
+                                const SizedBox(height: 5),
+                                Switch(
+                                  value: isSwitched2,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isSwitched2 = value;
+                                    });
+                                  },
+                                  activeTrackColor: Colors.lightGreenAccent,
+                                  activeColor: Colors.green,
                                 )
                               ],
                             ),
                           ],
                         ),
                       ),
-                    )),
-                  ],
-                )
+                    ))
               ],
             ),
             Column(
