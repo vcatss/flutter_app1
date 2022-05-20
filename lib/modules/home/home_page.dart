@@ -129,19 +129,8 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  loadProduct() async {
-    final HomeController c = Get.find();
-    var response = await ProductProvider().GetTopProduct();
-    var list = response.body["result"]["table"]["rows"] as List;
-    var itemsList = list.map((i) => ProductModel.fromJson(i)).toList();
-    c.listProduct = itemsList;
-    print(c.listProduct);
-  }
-
   @override
-  initState() {
-    loadProduct();
-  }
+  initState() {}
 
   @override
   Widget build(BuildContext context) {
