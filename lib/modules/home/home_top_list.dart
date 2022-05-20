@@ -23,7 +23,11 @@ class _HomeTopState extends State<HomeTop> {
     var response = await pp.GetTopProduct();
     var dataJson = response.body["result"]["table"]["rows"] as List;
     c.listProduct = dataJson.map((p) => ProductModel.fromJson(p)).toList();
-    return dataJson.map((p) => ProductModel.fromJson(p)).toList();
+    return dataJson
+        .map((p) => ProductModel.fromJson(p))
+        .toList()
+        .take(10)
+        .toList();
   }
 
   @override
@@ -41,103 +45,112 @@ class _HomeTopState extends State<HomeTop> {
         List<Widget> children;
         if (snapshot.hasData) {
           children = <Widget>[
-            const Icon(
-              Icons.check_circle_outline,
-              color: Colors.green,
-              size: 60,
-            ),
-            Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: destinations.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      ProductModel model = snapshot.data![index];
-                      print(index);
-                      return GestureDetector(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => NavigationScreen(const Detail())),
-                          // );
-                          Get.to(Detail(index));
-                        },
-                        child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(10.0),
-                            // color: Colors.red,
-                            child: Stack(
-                                alignment: Alignment.topCenter,
-                                children: <Widget>[
-                                  Positioned(
-                                    bottom: 15.0,
-                                    child: Container(
-                                      height: 120,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                                color: Colors.black26,
-                                                offset: Offset(0.0, 2.0),
-                                                blurRadius: 6.0)
-                                          ]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                                '${model.productName} activities',
-                                                style: const TextStyle(
-                                                    fontSize: 16.0,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black,
-                                                    letterSpacing: 1.2)),
-                                            Text(model.productName ?? "n/a",
-                                                style: const TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black45,
-                                                ))
-                                          ],
-                                        ),
+            SizedBox(
+              height: 290,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    ProductModel model = snapshot.data![index];
+                    return GestureDetector(
+                      onTap: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => NavigationScreen(const Detail())),
+                        // );
+                        Get.to(Detail(index));
+                      },
+                      child: Container(
+                          width: 210,
+                          margin: const EdgeInsets.all(10.0),
+                          // color: Colors.red,
+                          child: Stack(
+                              alignment: Alignment.topCenter,
+                              children: <Widget>[
+                                Positioned(
+                                  bottom: 15.0,
+                                  child: Container(
+                                    height: 120,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              color: Colors.black26,
+                                              offset: Offset(0.0, 2.0),
+                                              blurRadius: 6.0)
+                                        ]),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text('${model.productName}',
+                                              style: const TextStyle(
+                                                  fontSize: 14.0,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.black,
+                                                  letterSpacing: 1.2)),
+                                          Text(model.productName ?? "n/a",
+                                              style: const TextStyle(
+                                                fontSize: 13,
+                                                color: Colors.black45,
+                                              ))
+                                        ],
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
+                                ),
+                                Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                              color: Colors.black26,
+                                              offset: Offset(0.0, 2.0),
+                                              blurRadius: 6.0)
+                                        ]),
+                                    child: Stack(children: <Widget>[
+                                      Hero(
+                                        tag: 'hero-$index',
+                                        child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(20.0),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                                color: Colors.black26,
-                                                offset: Offset(0.0, 2.0),
-                                                blurRadius: 6.0)
-                                          ]),
-                                      child: Stack(children: <Widget>[
-                                        Hero(
-                                          tag: 'hero-$index',
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(20.0),
-                                            child: Image.network(
-                                                'https://znews-photo.zingcdn.me/w660/Uploaded/mfsy2/2022_04_26/ava_dj_soda.jpg',
-                                                height: 180,
-                                                width: 180,
-                                                fit: BoxFit.cover),
-                                          ),
+                                          child: FadeInImage.assetNetwork(
+                                              placeholder:
+                                                  'https://znews-photo.zingcdn.me/w660/Uploaded/mfsy2/2022_04_26/ava_dj_soda.jpg',
+                                              image: model.image![0],
+                                              height: 180,
+                                              width: 180,
+                                              fit: BoxFit.cover),
+                                          // Image.network(
+                                          //   model.image!.isEmpty
+                                          //       ? 'https://znews-photo.zingcdn.me/w660/Uploaded/mfsy2/2022_04_26/ava_dj_soda.jpg'
+                                          //       : ,
+                                          //   height: 180,
+                                          //   width: 180,
+                                          //   fit: BoxFit.cover,
+                                          //   errorBuilder:
+                                          //       (context, error, stackTrace) {
+                                          //     return Image.asset(
+                                          //         '',
+                                          //         fit: BoxFit.cover);
+                                          //   },
+                                          // ),
                                         ),
-                                      ]))
-                                ])),
-                      );
-                    }))
+                                      ),
+                                    ]))
+                              ])),
+                    );
+                  }),
+            ),
           ];
         } else if (snapshot.hasError) {
           children = <Widget>[
