@@ -60,7 +60,7 @@ class _HomeTopState extends State<HomeTop> {
                         //   MaterialPageRoute(
                         //       builder: (context) => NavigationScreen(const Detail())),
                         // );
-                        Get.to(Detail(index));
+                        Get.to(Detail(model));
                       },
                       child: Container(
                           width: 210,
@@ -118,7 +118,7 @@ class _HomeTopState extends State<HomeTop> {
                                     ]),
                                 child: Stack(children: <Widget>[
                                   Hero(
-                                    tag: 'hero-$index',
+                                    tag: 'hero-${model.sId}',
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(20.0),
                                       child: CachedNetworkImage(

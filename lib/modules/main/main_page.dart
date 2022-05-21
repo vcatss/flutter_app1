@@ -38,8 +38,8 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   ];
   final pageList = <Widget>[
     const HomePage(),
-    const Detail(0),
-    const Detail(0),
+    const HomePage(),
+    const HomePage(),
     const SettingPage(),
   ];
 
