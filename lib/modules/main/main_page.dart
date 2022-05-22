@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:app2/modules/home/home_detail.dart';
 import 'package:app2/modules/home/home_page.dart';
 import 'package:app2/modules/product/product_page.dart';
+import 'package:app2/modules/shopee/shoppe_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,8 @@ import '../../main.dart';
 import '../app_sign_in/sign_in_page.dart';
 import '../e_gate/e_gate_main_page.dart';
 import '../setting/setting_page.dart';
+
+import 'package:dio/dio.dart' as dioclass;
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -39,13 +42,14 @@ class _MainPage extends State<MainPage> with SingleTickerProviderStateMixin {
   final pageList = <Widget>[
     const HomePage(),
     const HomePage(),
-    const HomePage(),
+    const ShoppePage(),
     const SettingPage(),
   ];
 
   @override
   void initState() {
     super.initState();
+
     final systemTheme = SystemUiOverlayStyle.light.copyWith(
       systemNavigationBarColor: HexColor('#0000000'),
       systemNavigationBarIconBrightness: Brightness.light,
